@@ -1,6 +1,6 @@
 # Cerebro #
 
-Just some experimentations with Scala, Scalatra, embedded Jetty, deployed on Heroku.
+Just some experimentations with Scala, Scalatra, SBT, embedded Jetty, deployed on Heroku.
 
 ## Build & Run ##
 
