@@ -7,7 +7,7 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.gson.Gson
 import scala.Predef._
 
-class CerebroServlet extends CerebroStack with GoogleAuthSupport {
+class CerebroServlet extends CerebroStack {
   val CLIENT_ID : String = "21429338001-c3csvh6qicntvcsrm86360fdv3o173v8.apps.googleusercontent.com"
   val CLIENT_SECRET = "Rno1hfGUTTe4byL7IsnHCv8l"
   val APPLICATION_NAME = "Cerebro"
@@ -15,7 +15,6 @@ class CerebroServlet extends CerebroStack with GoogleAuthSupport {
   val TRANSPORT = new NetHttpTransport()
 
   get("/hello") {
-    googleAuth
     <html>
       <body>
         <h1>Hello, world!</h1>
