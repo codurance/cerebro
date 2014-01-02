@@ -1,0 +1,31 @@
+- attributes("title") = "Scalatra: a tiny, Sinatra-like web framework for Scala"
+- attributes("headline") = "Welcome to Scalatra"
+
+p= "Please sigin in using google id!"
+
+
+
+:javascript
+  function onSignInCallback(authResult) {
+    if (authResult['access_token']) {
+      $.ajax({
+          type: 'POST',
+          url: '/authenticate',
+          contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+          data: {authCode: authResult.code },
+          success: function(result) {
+            console.log(result);
+            alert('authenticated');
+          }
+        });
+    }
+  }
+
+#gConnect
+  button(class='g-signin'
+  data-scope='https://www.googleapis.com/auth/plus.login'
+  data-requestvisibleactions='http://schemas.google.com/AddActivity'
+  data-clientId='21429338001-c3csvh6qicntvcsrm86360fdv3o173v8.apps.googleusercontent.com'
+  data-accesstype='offline' data-callback='onSignInCallback'
+  data-theme='dark'
+  data-cookiepolicy='single_host_origin')

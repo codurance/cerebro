@@ -25,7 +25,12 @@ object CerebroBuild extends Build {
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
+        "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
+        "com.google.apis" % "google-api-services-oauth2" % "v2-rev59-1.17.0-rc",
+        "com.google.apis" % "google-api-services-plus" % "v1-rev115-1.17.0-rc",
+        "com.google.http-client" % "google-http-client-jackson" % "1.17.0-rc",
+        "com.google.code.gson" % "gson" % "2.2.4",
         "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile;container",
         "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile;container;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
