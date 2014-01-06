@@ -1,11 +1,11 @@
 - attributes("title") = "Scalatra: a tiny, Sinatra-like web framework for Scala"
 - attributes("headline") = "Welcome to Scalatra"
+-@ val originalUri: String
 
 p= "Please sigin in using google id!"
+p URI: #{originalUri}
 
-
-
-:javascript
+:!javascript
   function onSignInCallback(authResult) {
     if (authResult['access_token']) {
       $.ajax({
@@ -14,8 +14,7 @@ p= "Please sigin in using google id!"
           contentType: 'application/x-www-form-urlencoded; charset=utf-8',
           data: {authCode: authResult.code },
           success: function(result) {
-            console.log(result);
-            alert('authenticated');
+            window.location.replace('#{originalUri}');
           }
         });
     }

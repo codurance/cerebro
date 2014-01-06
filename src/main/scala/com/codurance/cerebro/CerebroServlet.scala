@@ -23,6 +23,11 @@ class CerebroServlet extends CerebroStack {
     </html>
   }
 
+  get("/signin") {
+    contentType="text/html"
+    jade("signin", "originalUri" -> params("originalUri"))
+  }
+
 
   post("/authenticate") {
     val authCode:String = params.getOrElse("authCode", halt(400))
@@ -35,4 +40,6 @@ class CerebroServlet extends CerebroStack {
     response.setStatus(HttpServletResponse.SC_OK)
     response.getWriter.print(new Gson().toJson("Successfully connected user: " + tokenResponse.getAccessToken))
   }
+
+
 }
