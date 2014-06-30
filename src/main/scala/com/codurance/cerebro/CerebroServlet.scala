@@ -22,7 +22,7 @@ class CerebroServlet extends CerebroStack {
 
 	get("/signin") {
 		contentType = "text/html"
-		jade("signin", "originalUri" -> params("originalUri"))
+		jade("signin", "originalUri" -> request.getParameter("originalUri"))
 	}
 
 
@@ -36,6 +36,7 @@ class CerebroServlet extends CerebroStack {
 		request.getSession.setAttribute("token", tokenResponse.toString)
 		response.setStatus(HttpServletResponse.SC_OK)
 		response.getWriter.print(new Gson().toJson("Successfully connected user: " + tokenResponse.getAccessToken))
+
 	}
 
 
