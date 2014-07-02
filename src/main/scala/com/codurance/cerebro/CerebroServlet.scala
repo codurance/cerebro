@@ -19,8 +19,6 @@ class CerebroServlet extends CerebroStack {
 
 	implicit val httpClient = new ApacheHttpClient
 
-//	val CLIENT_ID: String = "21429338001-c3csvh6qicntvcsrm86360fdv3o173v8.apps.googleusercontent.com"
-//	val CLIENT_SECRET = "Rno1hfGUTTe4byL7IsnHCv8l"
 	val CLIENT_ID: String = "1091582186456-sluhikl6ifksd1iifc8h3m5837dr1aq8.apps.googleusercontent.com"
 	val CLIENT_SECRET = "RZbRAJz3oG6IbcIsazrrYa-C"
 	val API_KEY = "AIzaSyDdwYp7F4NutbxQHEnBaR_mGrUnc_6WwfE"
