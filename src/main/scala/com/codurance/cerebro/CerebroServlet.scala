@@ -37,6 +37,10 @@ class CerebroServlet extends CerebroStack {
 		jade("signin", "originalUri" -> request.getParameter("originalUri"))
 	}
 
+	get("/non-authorised") {
+		contentType = "text/html"
+		jade("non-authorised")
+	}
 
 	post("/authenticate") {
 		val authCode: String = params.getOrElse("authCode", halt(400))
@@ -52,7 +56,8 @@ class CerebroServlet extends CerebroStack {
 		val url = new URL("https://www.googleapis.com/plus/v1/people/me?fields=aboutMe%2Ccover%2FcoverPhoto%2CdisplayName%2Cdomain%2Cemails%2Clanguage%2Cname&access_token=" + tokenResponse.getAccessToken)
 		val userInfo = Await.result(GET(url).apply, 10.seconds) //this will throw if the response doesn't return within 1 second
 		println("userInfo: " + userInfo.bodyString)
-		response.setStatus(HttpServletResponse.SC_OK)
+//		response.setStatus(HttpServletResponse.SC_OK)
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED)
 		response.getWriter.print(new Gson().toJson("Successfully connected user: " + tokenResponse.getAccessToken))
 
 	}

@@ -9,14 +9,17 @@ p URI: #{originalUri}
     function onSignInCallback(authResult) {
         if (authResult['access_token']) {
             $.ajax({
-            type: 'POST',
-            url: '/authenticate',
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-            data: {authCode: authResult.code },
-            success: function(result) {
-                window.location.replace('#{originalUri}');
+                type: 'POST',
+                url: '/authenticate',
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                data: {authCode: authResult.code },
+                success: function(result) {
+                    window.location.replace('#{originalUri}');
+                },
+                error: function(result) {
+                    window.location.replace('/non-authorised');
                 }
-                });
+            });
         }
     }
 
