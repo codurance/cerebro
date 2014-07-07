@@ -38,9 +38,9 @@ class CerebroServlet extends CerebroStack {
 		jade("signin", "originalUri" -> request.getParameter("originalUri"))
 	}
 
-	get("/non-authorised") {
+	get("/not-authorised") {
 		contentType = "text/html"
-		jade("non-authorised")
+		jade("not-authorised")
 	}
 
 	post("/authenticate") {
@@ -49,12 +49,16 @@ class CerebroServlet extends CerebroStack {
 			new GoogleAuthorizationCodeTokenRequest(
 				TRANSPORT, JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, authCode, "postmessage"
 			).execute
-		request.getSession.setAttribute("token", tokenResponse.toString)
 		val url = new URL("https://www.googleapis.com/plus/v1/people/me?fields=aboutMe%2Ccover%2FcoverPhoto%2CdisplayName%2Cdomain%2Cemails%2Clanguage%2Cname&access_token=" + tokenResponse.getAccessToken)
 		val userInfo = Await.result(GET(url).apply, 10.seconds) //this will throw if the response doesn't return within 1 second
 		val user = GooglePlusJSONResponseToUser.toUser(userInfo.bodyString)
+
 		user.domain match {
-			case Some(Domain("codurance.com")) => response.setStatus(SC_OK)
+			case Some(Domain("codurance.com")) => {
+				request.getSession.setAttribute("user", user)
+				request.getSession.setAttribute("token", tokenResponse.toString)
+				response.setStatus(SC_OK)
+			}
 			case _ => response.setStatus(SC_UNAUTHORIZED)
 		}
 		response.getWriter.print(new Gson().toJson("Successfully connected user: " + tokenResponse.getAccessToken))
