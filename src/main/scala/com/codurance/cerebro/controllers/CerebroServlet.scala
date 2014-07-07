@@ -1,17 +1,17 @@
-package com.codurance.cerebro
+package com.codurance.cerebro.controllers
 
 import java.net.URL
-import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletResponse.{SC_OK, SC_UNAUTHORIZED}
-import com.google.api.client.googleapis.auth.oauth2.{GoogleAuthorizationCodeTokenRequest, GoogleTokenResponse}
-import com.google.api.client.json.jackson.JacksonFactory
-import com.google.api.client.http.javanet.NetHttpTransport
-import com.google.gson.Gson
-import scala.Predef._
 
+import com.codurance.cerebro.security.{Domain, GooglePlusJSONResponseToUser}
+import com.google.api.client.googleapis.auth.oauth2.{GoogleAuthorizationCodeTokenRequest, GoogleTokenResponse}
+import com.google.api.client.http.javanet.NetHttpTransport
+import com.google.api.client.json.jackson.JacksonFactory
+import com.google.gson.Gson
 import com.stackmob.newman._
 import com.stackmob.newman.dsl._
 
+import scala.Predef._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 

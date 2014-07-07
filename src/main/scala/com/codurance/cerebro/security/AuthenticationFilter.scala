@@ -1,4 +1,4 @@
-package com.codurance.cerebro
+package com.codurance.cerebro.security
 
 import org.scalatra.ScalatraFilter
 

@@ -1,7 +1,8 @@
 package unit.com.codurance.cerebro
 
-import com.codurance.cerebro.{Domain, Language, Name, Email}
-import com.codurance.cerebro.GooglePlusJSONResponseToUser._
+import com.codurance.cerebro.security._
+import com.codurance.cerebro.Domain
+import GooglePlusJSONResponseToUser._
 import unit.SpecificationWithMockito
 
 class GooglePlusJsonToUserSpec extends SpecificationWithMockito {

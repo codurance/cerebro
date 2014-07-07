@@ -1,4 +1,4 @@
-package com.codurance.cerebro
+package com.codurance.cerebro.security
 
 case class User(name: Name, language: Language, domain: Option[Domain], emails: List[Email])
 

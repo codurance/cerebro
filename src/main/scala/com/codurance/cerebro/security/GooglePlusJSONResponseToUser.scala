@@ -1,5 +1,6 @@
-package com.codurance.cerebro
+package com.codurance.cerebro.security
 
+import com.codurance.cerebro._
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
