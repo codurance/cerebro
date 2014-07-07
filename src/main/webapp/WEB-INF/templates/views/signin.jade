@@ -10,7 +10,7 @@ p URI: #{originalUri}
         if (authResult['access_token']) {
             $.ajax({
                 type: 'POST',
-                url: '/authenticate',
+                url: '/authorise',
                 contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                 data: {authCode: authResult.code },
                 success: function(result) {

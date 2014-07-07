@@ -24,7 +24,7 @@ class AuthenticationFilter extends ScalatraFilter {
 	}
 
 	def notAuthPage(): Boolean = {
-		!request.getRequestURI.equals("/authenticate")
+		!request.getRequestURI.equals("/authorise")
 	}
 
 	def notNotAuthPage(): Boolean = {

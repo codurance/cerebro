@@ -43,7 +43,7 @@ class CerebroServlet extends CerebroStack {
 		jade("not-authorised")
 	}
 
-	post("/authenticate") {
+	post("/authorise") {
 		val authCode: String = params.getOrElse("authCode", halt(400))
 		val tokenResponse: GoogleTokenResponse =
 			new GoogleAuthorizationCodeTokenRequest(
