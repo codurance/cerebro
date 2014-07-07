@@ -6,14 +6,14 @@ import com.codurance.cerebro.security.{Domain, GooglePlus}
 
 import scala.Predef._
 
-class CerebroServlet extends BaseController {
+class MainController extends BaseController {
 
 	get("/") {
-		display("main", "user" -> request.getSession.getAttribute("user"))
+		display("main", "user" -> session.getAttribute("user"))
 	}
 
 	get("/main") {
-		display("main", "user" -> request.getSession.getAttribute("user"))
+		display("main", "user" -> session.getAttribute("user"))
 	}
 
 	get("/signin") {
@@ -29,7 +29,7 @@ class CerebroServlet extends BaseController {
 		val user = GooglePlus.userFor(authCode)
 		user.domain match {
 			case Some(Domain("codurance.com")) => {
-				request.getSession.setAttribute("user", user)
+				session.setAttribute("user", user)
 				response.setStatus(SC_OK)
 			}
 			case _ => response.setStatus(SC_UNAUTHORIZED)
