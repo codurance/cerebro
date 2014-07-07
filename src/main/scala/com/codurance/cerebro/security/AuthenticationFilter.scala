@@ -15,7 +15,6 @@ class AuthenticationFilter extends ScalatraFilter {
 	}
 
 	def notAuthenticated: Boolean = {
-		request.getSession.getAttribute("token") == null ||
 		request.getSession.getAttribute("user") == null
 	}
 

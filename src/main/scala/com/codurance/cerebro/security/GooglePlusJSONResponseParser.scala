@@ -1,14 +1,13 @@
 package com.codurance.cerebro.security
 
-import com.codurance.cerebro._
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
-object GooglePlusJSONResponseToUser {
+object GooglePlusJSONResponseParser {
 
 	implicit val formats = DefaultFormats
 
-	def toUser(googlePlusJSONResponse: String): User = {
+	def toUser(googlePlusJSONResponse: String, googleToken: String): User = {
 		val json = parse(googlePlusJSONResponse) transformField {
 			case ("value", x) => ("address", x)
 			case ("type", x)  => ("emailType", x)
@@ -18,7 +17,7 @@ object GooglePlusJSONResponseToUser {
 		val domain = toDomain(json)
 		val language = toLanguage(json)
 
-		User(name, language, domain, emails)
+		User(name, language, domain, emails, googleToken)
 	}
 
 	private def toLanguage(json: JValue) = {

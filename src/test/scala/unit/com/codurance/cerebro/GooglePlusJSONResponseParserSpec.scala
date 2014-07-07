@@ -1,12 +1,12 @@
 package unit.com.codurance.cerebro
 
+import com.codurance.cerebro.security.GooglePlusJSONResponseParser._
 import com.codurance.cerebro.security._
-import com.codurance.cerebro.Domain
-import GooglePlusJSONResponseToUser._
 import unit.SpecificationWithMockito
 
-class GooglePlusJsonToUserSpec extends SpecificationWithMockito {
-	
+class GooglePlusJSONResponseParserSpec extends SpecificationWithMockito {
+
+	val TOKEN = "2345678hshjflasjdf234"
 
 	val GOOGLE_PLUS_PEOPLE_API_RESPONSE = """
 		{
@@ -46,7 +46,11 @@ class GooglePlusJsonToUserSpec extends SpecificationWithMockito {
 
 	"GooglePlusJSONResponseToUser" should {
 
-		val user = toUser(GOOGLE_PLUS_PEOPLE_API_RESPONSE)
+		val user = toUser(GOOGLE_PLUS_PEOPLE_API_RESPONSE, TOKEN)
+
+		"populate token" in {
+			user.googleToken must be_==(TOKEN)
+		}
 
 		"populate name" in {
 			user.name must be_==(Name("Sandro", "Mancuso", Some("Sandro Mancuso")))
@@ -57,7 +61,7 @@ class GooglePlusJsonToUserSpec extends SpecificationWithMockito {
 		}
 
 		"populate empty domain" in {
-			val userWithNoDomain = toUser(USER_WITH_NO_DOMAIN)
+			val userWithNoDomain = toUser(USER_WITH_NO_DOMAIN, TOKEN)
 			userWithNoDomain.domain must be_==(None)
 		}
 
