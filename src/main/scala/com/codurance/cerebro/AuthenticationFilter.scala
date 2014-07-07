@@ -10,8 +10,8 @@ class AuthenticationFilter extends ScalatraFilter {
 	}
 
 	def originalURL(): String = {
-		val url = Option(request.getRequestURI).getOrElse("/hello")
-		if (url.startsWith("/signin")) "/hello" else url
+		val url = Option(request.getRequestURI).getOrElse("/main")
+		if (url.startsWith("/signin")) "/main" else url
 	}
 
 	def notAuthenticated: Boolean = {

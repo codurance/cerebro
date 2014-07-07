@@ -30,7 +30,12 @@ class CerebroServlet extends CerebroStack {
 
 	get("/") {
 		contentType = "text/html"
-		jade("hello")
+		jade("main", "user" -> request.getSession.getAttribute("user"))
+	}
+
+	get("/main") {
+		contentType = "text/html"
+		jade("main", "user" -> request.getSession.getAttribute("user"))
 	}
 
 	get("/signin") {
