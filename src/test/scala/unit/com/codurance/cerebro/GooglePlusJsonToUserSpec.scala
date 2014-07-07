@@ -1,6 +1,6 @@
 package unit.com.codurance.cerebro
 
-import com.codurance.cerebro.{Name, Email}
+import com.codurance.cerebro.{Domain, Language, Name, Email}
 import com.codurance.cerebro.GooglePlusJSONResponseToUser._
 import unit.SpecificationWithMockito
 
@@ -25,35 +25,43 @@ class GooglePlusJsonToUserSpec extends SpecificationWithMockito {
 		}
 		"""
 
-	"GooglePlusJSONResponseToUser" should {
-
-		val name = toName(GOOGLE_PLUS_PEOPLE_API_RESPONSE);
-
-		"populate display name" in {
-			name.displayName must be_==("Sandro Mancuso")
-		}
-
-		"populate family and given name" in {
-			name.familyName must be_==("Mancuso")
-			name.givenName must be_==("Sandro")
-		}
-
-	}
+	val USER_WITH_NO_DOMAIN =
+		"""
+			{
+		  	    "emails": [
+		            {
+						"value": "sandro@codurance.com",
+						"type": "account"
+					}
+				],
+				"displayName": "Sandro Mancuso",
+				"name": {
+					"familyName": "Mancuso",
+					"givenName": "Sandro"
+				},
+				"language": "en_GB"
+			}
+		"""
 
 	"GooglePlusJSONResponseToUser" should {
 
 		val user = toUser(GOOGLE_PLUS_PEOPLE_API_RESPONSE)
 
 		"populate name" in {
-			user.name must be_==(Name("Sandro", "Mancuso", "Sandro Mancuso"))
+			user.name must be_==(Name("Sandro", "Mancuso", Some("Sandro Mancuso")))
 		}
 
 		"populate domain" in {
-			user.domain must be_==("codurance.com")
+			user.domain must be_==(Some(Domain("codurance.com")))
+		}
+
+		"populate empty domain" in {
+			val userWithNoDomain = toUser(USER_WITH_NO_DOMAIN)
+			userWithNoDomain.domain must be_==(None)
 		}
 
 		"populate language" in {
-			user.language must be_==("en_GB")
+			user.language must be_==(Language("en_GB"))
 		}
 
 		"populate emails" in {

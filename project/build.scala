@@ -31,6 +31,8 @@ object CerebroBuild extends Build {
 				"com.google.http-client" % "google-http-client-jackson" % "1.17.0-rc",
 				"com.google.code.gson" % "gson" % "2.2.4",
 				"com.stackmob" %% "newman" % "1.3.5",
+				"org.json4s" %% "json4s-native" % "3.2.9",
+				"org.json4s" %% "json4s-jackson" % "3.2.9",
 				"com.typesafe.play" %% "play-json" % "2.2.3",
 				"ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
 				"org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile;container",
