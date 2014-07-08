@@ -26,6 +26,7 @@ object CerebroBuild extends Build {
 				"org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
 				"org.scalatra" %% "scalatra-auth" % ScalatraVersion,
 				"org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
+				"org.scalatra" %% "scalatra-scalatest" % ScalatraVersion % "test",
 				"com.google.apis" % "google-api-services-oauth2" % "v2-rev59-1.17.0-rc",
 				"com.google.apis" % "google-api-services-plus" % "v1-rev115-1.17.0-rc",
 				"com.google.http-client" % "google-http-client-jackson" % "1.17.0-rc",
