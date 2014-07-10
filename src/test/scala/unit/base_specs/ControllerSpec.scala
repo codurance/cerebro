@@ -1,8 +1,9 @@
 package unit.base_specs
 
-import javax.servlet.http.{HttpServletResponse, HttpServletRequest}
+import javax.servlet.http.{HttpServletRequest, HttpServletResponse}
 
 import org.scalatest.OptionValues
+import org.scalatest.matchers.ClassicMatchers
 import org.scalatest.mock.MockitoSugar
 import org.scalatra.ScalatraBase
 import org.scalatra.scalate.ScalateSupport
@@ -11,7 +12,8 @@ import unit.com.codurance.cerebro.security.LoggedInUserFilter
 
 class ControllerSpec extends ScalatraFlatSpec
 								with MockitoSugar
-								with OptionValues {
+								with OptionValues
+								with ClassicMatchers {
 
 	addFilter(new LoggedInUserFilter, "/*")
 
