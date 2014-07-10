@@ -1,6 +1,8 @@
 package com.codurance.cerebro.security
 
 import java.net.URL
+import javax.servlet.http.{HttpSession, HttpServletResponse, HttpServletRequest}
+import javax.servlet.http.HttpServletResponse._
 
 import com.google.api.client.googleapis.auth.oauth2.{GoogleAuthorizationCodeTokenRequest, GoogleTokenResponse}
 import com.google.api.client.http.javanet.NetHttpTransport
@@ -11,7 +13,7 @@ import com.stackmob.newman.dsl._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-object GooglePlus {
+object CoduranceAuthorisation {
 
 	implicit val httpClient = new ApacheHttpClient
 
@@ -22,6 +24,17 @@ object GooglePlus {
 	val APPLICATION_NAME = "Cerebro"
 	val JSON_FACTORY = new JacksonFactory()
 	val TRANSPORT = new NetHttpTransport()
+
+	def authorise(authCode: String)(implicit session: HttpSession, response: HttpServletResponse): Unit = {
+		val user = CoduranceAuthorisation.userFor(authCode)
+		user.domain match {
+			case Some(Domain("codurance.com")) => {
+				session.setAttribute("user", user)
+				response.setStatus(SC_OK)
+			}
+			case _ => response.setStatus(SC_UNAUTHORIZED)
+		}
+	}
 
 	def userFor(authCode: String): User = {
 		val tokenResponse: GoogleTokenResponse =

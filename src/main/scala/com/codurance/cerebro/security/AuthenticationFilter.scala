@@ -4,7 +4,7 @@ import org.scalatra.ScalatraFilter
 
 class AuthenticationFilter extends ScalatraFilter {
 	before() {
-		if (notSigninPage && notAuthPage && notNotAuthPage && notAuthenticated) {
+		if (isProtectedUrl && userIsNotAuthenticated) {
 			redirect("/signin?originalUri=" + originalURL)
 		}
 	}
@@ -14,19 +14,13 @@ class AuthenticationFilter extends ScalatraFilter {
 		if (url.startsWith("/signin")) "/main" else url
 	}
 
-	def notAuthenticated: Boolean = {
+	def userIsNotAuthenticated: Boolean = {
 		request.getSession.getAttribute("user") == null
 	}
-
-	def notSigninPage(): Boolean = {
-		!request.getRequestURI.equals("/signin")
+	
+	def isProtectedUrl(): Boolean = {
+		val url = request.getRequestURI();
+		!(url.equals("/signin") || url.equals("/authorise") || url.equals("/not-authorised"))
 	}
 
-	def notAuthPage(): Boolean = {
-		!request.getRequestURI.equals("/authorise")
-	}
-
-	def notNotAuthPage(): Boolean = {
-		!request.getRequestURI.equals("/not-authorised")
-	}
 }
