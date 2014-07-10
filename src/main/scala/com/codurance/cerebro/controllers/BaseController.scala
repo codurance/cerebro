@@ -6,7 +6,8 @@ class BaseController extends CerebroStack {
 
 	def display(page: String, attributes: (String, Any)*)(implicit request: HttpServletRequest, response: HttpServletResponse): String = {
 		contentType = "text/html"
-		jade(page, attributes:_*)
+		val all_attributes = attributes :+ ("user", session.getAttribute("user"))
+		jade(page, all_attributes: _*)
 	}
 
 }

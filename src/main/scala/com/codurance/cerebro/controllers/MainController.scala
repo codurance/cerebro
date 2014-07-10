@@ -9,11 +9,11 @@ import scala.Predef._
 class MainController extends BaseController {
 
 	get("/") {
-		display("main", "user" -> session.getAttribute("user"))
+		display("main")
 	}
 
 	get("/main") {
-		display("main", "user" -> session.getAttribute("user"))
+		display("main")
 	}
 
 	get("/signin") {
