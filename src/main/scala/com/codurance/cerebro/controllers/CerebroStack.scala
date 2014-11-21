@@ -14,13 +14,14 @@ trait CerebroStack extends ScalatraServlet with ScalateSupport {
 	/* wire up the precompiled templates */
 	override protected def defaultTemplatePath: List[String] = List("/WEB-INF/templates/views")
 
-	override protected def createTemplateEngine(config: ConfigT) = {
-		val engine = super.createTemplateEngine(config)
-		engine.layoutStrategy = new DefaultLayoutStrategy(engine,
-			TemplateEngine.templateTypes.map("/WEB-INF/templates/layouts/default." + _): _*)
-		engine.packagePrefix = "templates"
-		engine
-	}
+
+//	override protected def createTemplateEngine(config: ConfigT) = {
+//		val engine = super.createTemplateEngine(config)
+//		engine.layoutStrategy = new DefaultLayoutStrategy(engine,
+//			TemplateEngine.templateTypes.map("/WEB-INF/templates/layouts/default." + _): _*)
+//		engine.packagePrefix = "templates"
+//		engine
+//	}
 
 	/* end wiring up the precompiled templates */
 

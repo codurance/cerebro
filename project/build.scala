@@ -8,8 +8,9 @@ object CerebroBuild extends Build {
 	val Organization = "com.codurance"
 	val Name = "Cerebro"
 	val Version = "0.1.0-SNAPSHOT"
-	val ScalaVersion = "2.10.2"
-	val ScalatraVersion = "2.2.2"
+	val ScalaVersion = "2.10.4"
+	val ScalatraVersion = "2.3.0"
+	val JettyVersion = "9.2.5.v20141112"
 
 	lazy val project = Project(
 		"cerebro",
@@ -31,11 +32,11 @@ object CerebroBuild extends Build {
 				"com.google.apis" % "google-api-services-plus" % "v1-rev115-1.17.0-rc",
 				"com.google.http-client" % "google-http-client-jackson" % "1.17.0-rc",
 				"com.google.code.gson" % "gson" % "2.2.4",
-				"com.stackmob" %% "newman" % "1.3.5",
+				"com.stackmob" % "newman_2.10" % "1.3.5",
 				"org.json4s" %% "json4s-native" % "3.2.9",
 				"org.json4s" %% "json4s-jackson" % "3.2.9",
 				"ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
-				"org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile;container",
+				"org.eclipse.jetty" % "jetty-webapp" % JettyVersion % "compile;container",
 				"org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile;container;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
 			),
 			scalateTemplateConfig in Compile <<= (sourceDirectory in Compile) {
